@@ -15,7 +15,6 @@ data class Country(
     val capital: String,
     val region: String,
     val languages: String,
-    val avatar: String,
     val area: Double,
     val population: Double,
     val flag : String,

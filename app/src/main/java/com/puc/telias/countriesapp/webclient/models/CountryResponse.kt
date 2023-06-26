@@ -12,29 +12,29 @@ class CountryResponse(
 //    val independent: Boolean,
 //    val status: String,
 //    val unMember: Boolean,
-//    val currencies: Currencies,
+    val currencies: Map<String, Currencies>,
 //    val idd: Idd,
-//    val capital: List<String>,
+    val capital: List<String>,
 //    val altSpellings: List<String>,
 //    val region: String,
-//    val subregion: String,
-//    val languages: Languages,
-//    val translations: Map<String, Translation>,
+    val subregion: String,
+    val languages: Map<String, String>,
+    val translations: Map<String, Translation>,
 //    val latlng: List<Long>,
 //    val landlocked: Boolean,
 //    val borders: List<String>,
-//    val area: Long,
+    val area: Long,
 //    val demonyms: Demonyms,
 //    val flag: String,
 //    val maps: Maps,
-//    val population: Long,
+    val population: Long,
 //    val gini: Gini,
 //    val fifa: String,
 //    val car: Car,
 //    val timezones: List<String>,
 //    val continents: List<String>,
-//    val flags: Flags,
-//    val coatOfArms: CoatOfArms,
+    val flags: Flags,
+    val coatOfArms: CoatOfArms,
 //    val startOfWeek: String,
 //    val capitalInfo: CapitalInfo,
 //    val postalCode: PostalCode
@@ -42,21 +42,47 @@ class CountryResponse(
     val country: Country?
         get() = Country(
             code = cca3,
-            namePortuguese = "",
-            nameUS = "",
-            nameLocal = "",
-            nameComplete = "",
-            currency = "",
-            capital = "",
-            region = "",
-            languages = "",
-            avatar = "",
-            area = 0.0,
-            population = 0.0,
-            flag = "",
-            coatOfArms = ""
+            namePortuguese = translations["por"]?.common ?: "",
+            nameUS = name.common,
+            nameLocal = name.nativeName.firstNotNullOf { it.value.common },
+            nameComplete = name.official,
+            currency = currencies.firstNotNullOf { "${it.value.name} (${it.value.symbol})" },
+            capital = capital[0],
+            region = subregion,
+            languages = languages.values.joinToString(separator = "|"),
+            area = area.toDouble(),
+            population = population.toDouble(),
+            flag = flags.png,
+            coatOfArms = coatOfArms.png
         )
 }
+
+data class Name(
+    val common: String,
+    val official: String,
+    val nativeName: Map<String, Translation>
+)
+
+data class Translation(
+    val official: String,
+    val common: String
+)
+
+data class Currencies(
+    val name: String,
+    val symbol: String
+)
+
+data class Flags(
+    val png: String,
+    val svg: String,
+    val alt: String
+)
+
+data class CoatOfArms(
+    val png: String,
+    val svg: String
+)
 
 //data class CapitalInfo (
 //    val latlng: List<Double>
@@ -67,21 +93,6 @@ class CountryResponse(
 //    val side: String
 //)
 //
-//data class CoatOfArms (
-//    val png: String,
-//    val svg: String
-//)
-//
-//data class Currencies (
-//    @Json(name = "BRL")
-//    val brl: Brl
-//)
-//
-//data class Brl (
-//    val name: String,
-//    val symbol: String
-//)
-//
 //data class Demonyms (
 //    val eng: Eng,
 //    val fra: Eng
@@ -90,12 +101,6 @@ class CountryResponse(
 //data class Eng (
 //    val f: String,
 //    val m: String
-//)
-//
-//data class Flags (
-//    val png: String,
-//    val svg: String,
-//    val alt: String
 //)
 //
 //data class Gini (
@@ -115,21 +120,6 @@ class CountryResponse(
 //data class Maps (
 //    val googleMaps: String,
 //    val openStreetMaps: String
-//)
-//
-data class Name (
-    val common: String,
-    val official: String,
-//    val nativeName: NativeName
-)
-//
-//data class NativeName (
-//    val por: Translation
-//)
-//
-//data class Translation (
-//    val official: String,
-//    val common: String
 //)
 //
 //data class PostalCode (
