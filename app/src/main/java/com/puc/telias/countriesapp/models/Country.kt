@@ -16,8 +16,8 @@ data class Country(
     val region: String,
     val languages: String,
     val avatar: String,
-    val area: Float,
-    val population: Float,
+    val area: Double,
+    val population: Double,
     val flag : String,
     @ColumnInfo("coat_of_arms") val coatOfArms: String
 )
