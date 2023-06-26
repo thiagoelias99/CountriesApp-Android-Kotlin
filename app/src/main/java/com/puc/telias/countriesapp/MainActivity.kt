@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val name = "japan"
+        val name = "ukraine"
 
         lifecycleScope.launch {
             val countries = repository.search(name)
