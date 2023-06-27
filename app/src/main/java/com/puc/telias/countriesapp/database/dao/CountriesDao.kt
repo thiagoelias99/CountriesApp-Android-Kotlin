@@ -18,4 +18,7 @@ interface CountriesDao {
 
     @Query("""SELECT * FROM countries""")
     fun getAll(): Flow<List<Country>>
+
+    @Query("""SELECT * FROM countries WHERE code_cca3 = :code""")
+    suspend fun getByCode(code: String): Country?
 }

@@ -7,20 +7,20 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.puc.telias.countriesapp.R
-import com.puc.telias.countriesapp.databinding.RecyclerItemSearchCountriesBinding
+import com.puc.telias.countriesapp.databinding.RecyclerItemListCountriesBinding
 import com.puc.telias.countriesapp.models.Country
 
-class CountriesSearchAdapter(
+class CountriesListAdapter(
     private val context: Context,
     countriesList: List<Country?> = emptyList(),
     var quandoClicaNoItem: (country: Country) -> Unit = {}
-) : RecyclerView.Adapter<CountriesSearchAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<CountriesListAdapter.ViewHolder>() {
 
     private val countries = countriesList.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            RecyclerItemSearchCountriesBinding.inflate(LayoutInflater.from(context), parent, false)
+            RecyclerItemListCountriesBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -31,11 +31,13 @@ class CountriesSearchAdapter(
 
     override fun getItemCount(): Int = countries.size
 
-    inner class ViewHolder(binding: RecyclerItemSearchCountriesBinding) :
+    inner class ViewHolder(binding: RecyclerItemListCountriesBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Country) {
+            val code = itemView.findViewById<TextView>(R.id.country_code)
             val name = itemView.findViewById<TextView>(R.id.country_name)
 
+            code.text = item.code
             name.text = item.namePortuguese
         }
 
