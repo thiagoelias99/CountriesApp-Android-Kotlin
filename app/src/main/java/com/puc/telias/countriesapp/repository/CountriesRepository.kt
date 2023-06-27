@@ -25,4 +25,8 @@ class CountriesRepository(
     suspend fun getByCode(code: String): Country?{
         return dao.getByCode(code)
     }
+
+    suspend fun destroy(country: Country){
+        return dao.destroy(country)
+    }
 }

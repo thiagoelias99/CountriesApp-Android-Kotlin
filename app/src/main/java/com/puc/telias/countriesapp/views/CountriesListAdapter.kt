@@ -3,9 +3,11 @@ package com.puc.telias.countriesapp.views
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.puc.telias.countriesapp.R
 import com.puc.telias.countriesapp.databinding.RecyclerItemListCountriesBinding
 import com.puc.telias.countriesapp.models.Country
@@ -34,11 +36,13 @@ class CountriesListAdapter(
     inner class ViewHolder(binding: RecyclerItemListCountriesBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Country) {
-            val code = itemView.findViewById<TextView>(R.id.country_code)
-            val name = itemView.findViewById<TextView>(R.id.country_name)
+            val title = itemView.findViewById<TextView>(R.id.title)
+            val subTitle = itemView.findViewById<TextView>(R.id.subtitle)
+            val image = itemView.findViewById<ImageView>(R.id.image)
 
-            code.text = item.code
-            name.text = item.namePortuguese
+            title.text = item.namePortuguese
+            subTitle.text = item.nameUS
+            image.load(item.flag)
         }
 
         init {

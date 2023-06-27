@@ -36,7 +36,7 @@ class CountriesSearchAdapter(
         fun bind(item: Country) {
             val name = itemView.findViewById<TextView>(R.id.country_name)
 
-            name.text = item.namePortuguese
+            name.text = item.nameUS
         }
 
         init {

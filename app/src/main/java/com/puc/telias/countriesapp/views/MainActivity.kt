@@ -1,5 +1,6 @@
 package com.puc.telias.countriesapp.views
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,11 +17,13 @@ import com.puc.telias.countriesapp.databinding.AddCountryDialogBinding
 import com.puc.telias.countriesapp.models.Country
 import com.puc.telias.countriesapp.repository.CountriesRepository
 import com.puc.telias.countriesapp.webclient.clients.CountryClient
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
+
+    val sharedPrefs = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+    val loggedUser = sharedPrefs.getString("USER_KEY", null)
 
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private val repository by lazy {
         CountriesRepository(
-            AppDatabase.getConnection(this).gitHubUserDao(),
+            AppDatabase.getConnection(this).countriesDao(),
             CountryClient()
         )
     }
@@ -57,6 +60,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        if (loggedUser.isNullOrEmpty()) {
+            Intent(this, LoginActivity::class.java).run{
+                startActivity(this)
+            }
+        }
 
         lifecycleScope.launch {
             repository.getAll().collect {

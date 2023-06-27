@@ -4,10 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
-import com.puc.telias.countriesapp.R
+import coil.load
 import com.puc.telias.countriesapp.database.AppDatabase
 import com.puc.telias.countriesapp.databinding.ActivityCountryDetailsBinding
-import com.puc.telias.countriesapp.databinding.ActivityMainBinding
 import com.puc.telias.countriesapp.models.Country
 import com.puc.telias.countriesapp.repository.CountriesRepository
 import com.puc.telias.countriesapp.webclient.clients.CountryClient
@@ -22,7 +21,7 @@ class CountryDetailsActivity : AppCompatActivity() {
 
     private val repository by lazy {
         CountriesRepository(
-            AppDatabase.getConnection(this).gitHubUserDao(),
+            AppDatabase.getConnection(this).countriesDao(),
             CountryClient()
         )
     }
@@ -35,11 +34,28 @@ class CountryDetailsActivity : AppCompatActivity() {
 
         val countryCode = intent.getStringExtra("COUNTRY_CODE")
 
-        binding.textView.text = countryCode
+        binding.floatingActionButton.setOnClickListener {
+            lifecycleScope.launch {
+                country?.let {
+                    repository.destroy(it)
+                }
+                finish()
+            }
+        }
+
         lifecycleScope.launch {
             country = repository.getByCode(countryCode ?: "")
             Log.i(TAG, "onCreate: $country")
-        }
 
+            binding.title.text = country?.nameUS ?: ""
+            binding.subTitle.text = country?.namePortuguese ?: ""
+            binding.decription.text = country?.nameComplete ?: ""
+            binding.capital.text = country?.capital ?: ""
+            binding.currency.text = country?.currency ?: ""
+            binding.area.text = country?.area.toString() ?: ""
+            binding.population.text = country?.population.toString() ?: ""
+            binding.flagContainer.load(country?.flag)
+            binding.armsContainer.load(country?.coatOfArms)
+        }
     }
 }
