@@ -22,8 +22,8 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
-    val sharedPrefs = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-    val loggedUser = sharedPrefs.getString("USER_KEY", null)
+
+    var loggedUser: String? = null
 
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -60,6 +60,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val sharedPrefs = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        loggedUser = sharedPrefs.getString("USER_KEY", null)
 
         if (loggedUser.isNullOrEmpty()) {
             Intent(this, LoginActivity::class.java).run{

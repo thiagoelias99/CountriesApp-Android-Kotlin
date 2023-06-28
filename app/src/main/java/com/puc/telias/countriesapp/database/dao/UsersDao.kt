@@ -14,6 +14,9 @@ interface UsersDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(user: User)
 
+    @Query("""SELECT * FROM user WHERE user_name = :userName""")
+    suspend fun selectByUserName(userName: String): User?
+
 //    @Delete
 //    suspend fun destroy(user: User)
 
