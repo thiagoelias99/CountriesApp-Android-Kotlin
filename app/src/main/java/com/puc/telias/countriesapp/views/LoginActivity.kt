@@ -35,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
         val intent = Intent(this, MainActivity::class.java)
 
+
         binding.loginButton.setOnClickListener {
             lifecycleScope.launch {
             val user = repository.login(binding.userName.text.toString(), binding.password.text.toString())
