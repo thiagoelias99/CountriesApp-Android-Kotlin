@@ -13,7 +13,7 @@ import com.puc.telias.countriesapp.models.Country
 class CountriesSearchAdapter(
     private val context: Context,
     countriesList: List<Country?> = emptyList(),
-    var quandoClicaNoItem: (country: Country) -> Unit = {}
+    var itemClickHandler: (country: Country) -> Unit = {}
 ) : RecyclerView.Adapter<CountriesSearchAdapter.ViewHolder>() {
 
     private val countries = countriesList.toMutableList()
@@ -49,7 +49,7 @@ class CountriesSearchAdapter(
                         "Clicou em ${clickedCountry!!.namePortuguese}",
                         Toast.LENGTH_SHORT
                     ).show()
-                    quandoClicaNoItem(clickedCountry)
+                    itemClickHandler(clickedCountry)
                 }
             }
         }
