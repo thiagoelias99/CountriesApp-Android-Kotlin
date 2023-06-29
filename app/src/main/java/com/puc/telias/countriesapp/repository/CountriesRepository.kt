@@ -22,6 +22,9 @@ class CountriesRepository(
     fun getAll(): Flow<List<Country>>{
         return dao.getAll()
     }
+    fun getAllFromUser(userName: String): Flow<List<Country>>{
+        return dao.getAllFromUser(userName)
+    }
     suspend fun getByCode(code: String): Country?{
         return dao.getByCode(code)
     }

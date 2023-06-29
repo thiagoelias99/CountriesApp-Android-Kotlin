@@ -2,11 +2,14 @@ package com.puc.telias.countriesapp.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import java.util.UUID
 
 @Entity(tableName = "countries")
 data class Country(
-    @PrimaryKey @ColumnInfo("code_cca3") val code: String,
+    @PrimaryKey val uuid: UUID,
+    @ColumnInfo("code_cca3") val code: String,
     @ColumnInfo("name_portuguese") val namePortuguese: String,
     @ColumnInfo("name_us") val nameUS: String,
     @ColumnInfo("name_local")val nameLocal: String,
@@ -18,5 +21,6 @@ data class Country(
     val area: Double,
     val population: Double,
     val flag : String,
-    @ColumnInfo("coat_of_arms") val coatOfArms: String
+    @ColumnInfo("coat_of_arms") val coatOfArms: String,
+    @ColumnInfo("user_name") var userName: String? = null
 )

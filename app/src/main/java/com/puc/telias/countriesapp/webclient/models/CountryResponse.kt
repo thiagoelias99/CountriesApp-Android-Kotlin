@@ -1,6 +1,7 @@
 package com.puc.telias.countriesapp.webclient.models
 
 import com.puc.telias.countriesapp.models.Country
+import java.util.UUID
 
 class CountryResponse(
     val name: Name?,
@@ -53,7 +54,8 @@ class CountryResponse(
             area = area?.toDouble() ?: 0.0,
             population = population?.toDouble() ?: 0.0,
             flag = flags?.png ?: "",
-            coatOfArms = coatOfArms?.png ?: ""
+            coatOfArms = coatOfArms?.png ?: "",
+            uuid = UUID.randomUUID()
         )
 }
 

@@ -65,22 +65,23 @@ class MainActivity : AppCompatActivity() {
         loggedUser = sharedPrefs.getString("USER_KEY", null)
 
         if (loggedUser.isNullOrEmpty()) {
-            Intent(this, LoginActivity::class.java).run{
+            Intent(this, LoginActivity::class.java).run {
                 startActivity(this)
+            }
+        } else {
+            lifecycleScope.launch {
+                repository.getAllFromUser(loggedUser!!).collect {
+                    Log.i(TAG, "carregados: $it")
+                    countriesListAdapter.update(it)
+                }
             }
         }
 
-        lifecycleScope.launch {
-            repository.getAll().collect {
-                Log.i(TAG, "carregados: $it")
-                countriesListAdapter.update(it)
-            }
-        }
 
         val fab = binding.fab
 
         countriesListAdapter.quandoClicaNoItem = {
-            Intent(this,CountryDetailsActivity::class.java).run {
+            Intent(this, CountryDetailsActivity::class.java).run {
                 putExtra("COUNTRY_CODE", it.code)
                 startActivity(this)
             }
@@ -101,6 +102,7 @@ class MainActivity : AppCompatActivity() {
                 .setPositiveButton("Confirmar") { _, _ ->
                     lifecycleScope.launch {
                         selectedCountry?.let { country ->
+                            country.userName = loggedUser
                             repository.save(country)
                         }
                     }
@@ -155,25 +157,7 @@ class MainActivity : AppCompatActivity() {
             addCountryDialogBinding.recyclerView.run {
                 layoutManager = LinearLayoutManager(this@MainActivity)
                 adapter = countriesSearchAdapter
-
-
             }
-
-//            addCountryDialogBinding.addGitHubUserDialogButton.setOnClickListener {
-//                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = false
-//                lifecycleScope.launch {
-//                    userLogin = addCountryDialogBinding.addGitHubUserDialogSearch.text.toString()
-//                    user = repository.getUserByLogin(userLogin)
-//                    user?.let {user ->
-//                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = true
-//                        addCountryDialogBinding.run {
-//                            addGitHubUserDialogName.text = user.name
-//                            addGitHubUserDialogCompany.text = user.company
-//                        }
-//                    }
-//                }
-//            }
-
             alertDialog.show()
         }
     }
