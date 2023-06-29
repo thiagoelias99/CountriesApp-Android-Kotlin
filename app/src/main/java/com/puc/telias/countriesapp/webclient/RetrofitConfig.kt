@@ -16,7 +16,7 @@ class RetrofitConfig {
     }
 
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://restcountries.com/v3.1/name/")
+        .baseUrl("https://restcountries.com/v3.1/translation/")
         .addConverterFactory(MoshiConverterFactory.create())
         .client(client)
         .build()
