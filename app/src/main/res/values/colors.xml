@@ -9,4 +9,11 @@
     <color name="text_2">#edf6f5</color>
     <color name="background_3">#e5f2f5</color>
     <color name="text_3">#4da7a8</color>
+
+    <color name="colorPrimary">#347475</color>
+    <color name="colorPrimaryVariant">#4da7a8</color>
+    <color name="colorOnPrimary">#edf6f5</color>
+    <color name="colorSecondary">#4da7a8</color>
+    <color name="colorSecondaryVariant">#347475</color>
+    <color name="colorOnSecondary">#edf6f5</color>
 </resources>
