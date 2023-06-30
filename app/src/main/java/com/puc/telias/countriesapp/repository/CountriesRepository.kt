@@ -17,7 +17,8 @@ class CountriesRepository(
         var filteredCountries: List<Country?>? = null
 
         webClient.searchByName(search)?.let { countries ->
-            filteredCountries = countries.filter { it?.namePortuguese?.contains(regex) ?: false }
+//            filteredCountries = countries.filter { it?.namePortuguese?.contains(regex) ?: false }
+            filteredCountries = countries.filter { it?.namePortuguese?.startsWith(search,true) ?: false }
         }
 
         return filteredCountries

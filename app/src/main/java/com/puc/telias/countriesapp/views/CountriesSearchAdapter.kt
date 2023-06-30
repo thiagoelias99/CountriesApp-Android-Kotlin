@@ -43,13 +43,10 @@ class CountriesSearchAdapter(
             binding.root.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val clickedCountry = countries[position]
-                    Toast.makeText(
-                        context,
-                        "Clicou em ${clickedCountry!!.namePortuguese}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    itemClickHandler(clickedCountry)
+                    countries[position]?.let {
+                        itemClickHandler(it)
+                    }
+
                 }
             }
         }

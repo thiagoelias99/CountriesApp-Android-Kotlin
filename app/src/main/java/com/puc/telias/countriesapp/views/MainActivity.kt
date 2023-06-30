@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
 
     //Aux Functions
     private fun configureRecyclerView() {
-        countriesListAdapter.quandoClicaNoItem = {
+        countriesListAdapter.itemClickHandler = {
             Intent(this, CountryDetailsActivity::class.java).run {
                 putExtra("COUNTRY_CODE", it.code)
                 startActivity(this)

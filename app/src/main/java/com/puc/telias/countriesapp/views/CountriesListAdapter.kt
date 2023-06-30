@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.puc.telias.countriesapp.R
@@ -15,7 +14,7 @@ import com.puc.telias.countriesapp.models.Country
 class CountriesListAdapter(
     private val context: Context,
     countriesList: List<Country?> = emptyList(),
-    var quandoClicaNoItem: (country: Country) -> Unit = {}
+    var itemClickHandler: (country: Country) -> Unit = {}
 ) : RecyclerView.Adapter<CountriesListAdapter.ViewHolder>() {
 
     private val countries = countriesList.toMutableList()
@@ -49,13 +48,9 @@ class CountriesListAdapter(
             binding.root.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val clickedCountry = countries[position]
-                    Toast.makeText(
-                        context,
-                        "Clicou em ${clickedCountry!!.namePortuguese}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    quandoClicaNoItem(clickedCountry)
+                    countries[position]?.let {
+                        itemClickHandler(it)
+                    }
                 }
             }
         }
