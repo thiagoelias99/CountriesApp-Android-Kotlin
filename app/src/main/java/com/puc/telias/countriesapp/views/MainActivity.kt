@@ -8,9 +8,12 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.puc.telias.countriesapp.R
 import com.puc.telias.countriesapp.database.AppDatabase
 import com.puc.telias.countriesapp.databinding.ActivityMainBinding
 import com.puc.telias.countriesapp.databinding.AddCountryDialogBinding
@@ -46,15 +49,43 @@ class MainActivity : AppCompatActivity() {
             countriesList = emptyList()
         )
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolBar)
 
         //Ok
         loadUser()
         loadCountriesList(loggedUser)
         configureFAB(this)
         configureRecyclerView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_activity_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_logout -> {
+                handleLogout()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun handleLogout() {
+        getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE).let { sharedPrefs ->
+            val editor = sharedPrefs.edit()
+            editor.apply {
+                putString("USER_KEY", null)
+            }.apply()
+            Intent(this, LoginActivity::class.java).run {
+                startActivity(this)
+            }
+        }
     }
 
     //Aux Functions
@@ -71,6 +102,7 @@ class MainActivity : AppCompatActivity() {
             adapter = countriesListAdapter
         }
     }
+
     private fun loadCountriesList(loggedUser: String) {
         lifecycleScope.launch {
             repository.getAllFromUser(loggedUser).collect {
@@ -78,6 +110,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun loadUser() {
         val user: String? = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE).run {
             getString("USER_KEY", null)
@@ -91,6 +124,7 @@ class MainActivity : AppCompatActivity() {
             loggedUser = user
         }
     }
+
     private fun configureFAB(context: Context) {
         binding.fab.run {
             setOnClickListener {
@@ -98,6 +132,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun showDialog(context: Context) {
         val addCountryDialogBinding = AddCountryDialogBinding.inflate(layoutInflater)
         var name = ""
