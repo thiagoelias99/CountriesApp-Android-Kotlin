@@ -16,4 +16,12 @@
     <color name="colorSecondary">#4da7a8</color>
     <color name="colorSecondaryVariant">#347475</color>
     <color name="colorOnSecondary">#edf6f5</color>
+    <color name="color_error_background">#c1544e</color>
+    <color name="color_error_text">#f9eeee</color>
+    <color name="color_warning_background">#e09049</color>
+    <color name="color_warning_text">#422a15</color>
+    <color name="color_info_background">#6294d1</color>
+    <color name="color_info_text">#16212f</color>
+    <color name="color_success_background">#69995b</color>
+    <color name="color_success_text">#172114</color>
 </resources>

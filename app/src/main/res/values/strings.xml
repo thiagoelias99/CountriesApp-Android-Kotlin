@@ -2,8 +2,8 @@
     <string name="app_name">CountriesApp</string>
     <string name="button_login_register">Registrar</string>
     <string name="button_login_login">Login</string>
-    <string name="hint_login_password">Password</string>
-    <string name="hint_login_user_name">UserName</string>
+    <string name="hint_login_password">Senha</string>
+    <string name="hint_login_user_name">Usuário</string>
     <string name="title_login">Entre com sua conta</string>
-    <string name="sub_title_login">Ou crie uma conta</string>
+    <string name="sub_title_login">Ou registre para uma nova</string>
 </resources>

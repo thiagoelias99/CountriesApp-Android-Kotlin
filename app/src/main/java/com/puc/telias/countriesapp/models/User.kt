@@ -7,7 +7,7 @@ import java.util.UUID
 
 @Entity
 data class User(
-    @PrimaryKey @ColumnInfo("user_name") val userName: String,
-    val name: String,
+    @PrimaryKey @ColumnInfo("user_name") var userName: String,
+    var name: String,
     val password: String
 )

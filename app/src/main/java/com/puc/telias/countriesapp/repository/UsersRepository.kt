@@ -17,11 +17,12 @@ class UsersRepository(
 //    }
 
     suspend fun save(user: User){
+        user.userName = user.userName.lowercase()
         return dao.insert(user)
     }
 
     suspend fun login(userName: String, password: String): User?{
-        dao.selectByUserName(userName)?.let { user ->
+        dao.selectByUserName(userName.lowercase())?.let { user ->
             if (user.password == password) return user
         }
         return null
