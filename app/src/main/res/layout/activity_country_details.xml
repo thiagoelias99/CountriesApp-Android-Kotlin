@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".views.CountryDetailsActivity">
 
     <ImageView
@@ -13,9 +14,17 @@
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10px"
+        android:background="#6d6d6d"
+
+        app:layout_constraintTop_toBottomOf="@id/flag_container"
+        />
 
     <TextView
         android:id="@+id/title"
@@ -24,12 +33,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:paddingVertical="8dp"
-        android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="28dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h1"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flag_container"
         tools:text="Brazil" />
@@ -38,46 +46,56 @@
         android:id="@+id/sub_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="18dp"
-        tools:text="Brasil"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_body_1"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="@+id/title"
         app:layout_constraintStart_toStartOf="@+id/title"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:text="Brasil" />
 
     <TextView
         android:id="@+id/decription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="22dp"
-        tools:text="República Federativa do Brasil"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h3"
         app:layout_constraintEnd_toEndOf="@+id/title"
         app:layout_constraintStart_toStartOf="@+id/title"
-        app:layout_constraintTop_toBottomOf="@+id/sub_title" />
+        app:layout_constraintTop_toBottomOf="@+id/sub_title"
+        tools:text="República Federativa do Brasil" />
 
-    <ImageView
-        android:id="@+id/arms_container"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:scaleType="fitCenter"
-        android:translationY="60dp"
+        android:background="@color/white"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/flag_container"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/flag_container">
+
+        <ImageView
+            android:id="@+id/arms_container"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:scaleType="fitCenter"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Capital:"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-
-        android:textSize="22dp"
+        android:text="@string/field_Title_capital"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h3"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/decription" />
 
@@ -85,9 +103,9 @@
         android:id="@+id/capital"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="22dp"
         android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h3"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="@+id/textView4"
         tools:text="Brasília" />
@@ -97,11 +115,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Currency:"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-
-        android:textSize="22dp"
+        android:text="@string/field_Title_currency"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h3"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -109,9 +126,9 @@
         android:id="@+id/currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="22dp"
         android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h3"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/textView5"
         tools:text="Real" />
@@ -121,11 +138,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Area:"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-
-        android:textSize="22dp"
+        android:text="@string/field_title_area"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h3"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -133,9 +149,9 @@
         android:id="@+id/area"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="22dp"
         android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h3"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="@+id/textView6"
         tools:text="222222" />
@@ -145,11 +161,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Area:"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-
-        android:textSize="22dp"
+        android:text="@string/field_title_population"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h3"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -157,9 +172,9 @@
         android:id="@+id/population"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="22dp"
         android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/h3"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="@+id/textView7"
         tools:text="222222" />
@@ -170,7 +185,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:clickable="true"
+        android:tint="@color/white"
+        app:backgroundTint="@color/background_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_delete" />

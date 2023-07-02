@@ -47,8 +47,8 @@ class CountryDetailsActivity : AppCompatActivity() {
             country = repository.getByCode(countryCode ?: "")
             Log.i(TAG, "onCreate: $country")
 
-            binding.title.text = country?.nameUS ?: ""
-            binding.subTitle.text = country?.namePortuguese ?: ""
+            binding.title.text = country?.namePortuguese ?: ""
+            binding.subTitle.text = country?.nameUS ?: ""
             binding.decription.text = country?.nameComplete ?: ""
             binding.capital.text = country?.capital ?: ""
             binding.currency.text = country?.currency ?: ""
