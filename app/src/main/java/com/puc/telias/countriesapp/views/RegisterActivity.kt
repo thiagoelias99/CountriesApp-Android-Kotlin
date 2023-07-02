@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.puc.telias.countriesapp.R
 import com.puc.telias.countriesapp.database.AppDatabase
 import com.puc.telias.countriesapp.databinding.ActivityLoginBinding
@@ -31,21 +32,32 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        configureInterface()
+    }
+
+    private fun configureInterface() {
+        configureRegisterButton()
+        configureCancelButton()
+    }
+
+    private fun configureCancelButton() {
+        binding.cancelButton.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun configureRegisterButton() {
         binding.registerButton.setOnClickListener {
             if (
                 binding.name.text.isNullOrBlank() ||
                 binding.userName.text.isNullOrBlank() ||
                 binding.password1.text.isNullOrBlank()
             ) {
-                Toast.makeText(
-                    this,
-                    "Todas as Informações devem ser preenchidas",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showError("Todas as informações devem ser preenchidas")
             } else if (
                 !binding.password1.text.toString().equals(binding.password2.text.toString())
             ) {
-                Toast.makeText(this, "As senhas nã o são iguais", Toast.LENGTH_SHORT).show()
+                showError("As senhas não são iguais")
             } else {
                 lifecycleScope.launch {
                     repository.save(
@@ -58,7 +70,18 @@ class RegisterActivity : AppCompatActivity() {
                     finish()
                 }
             }
-
         }
+    }
+
+    private fun showError(message: String) {
+        val contextView = binding.notificationView
+        Snackbar.make(
+            contextView,
+            message,
+            Snackbar.LENGTH_SHORT
+        )
+            .setBackgroundTint(resources.getColor(R.color.color_error_background))
+            .setTextColor(resources.getColor(R.color.color_error_text))
+            .show()
     }
 }
