@@ -3,9 +3,11 @@ package com.puc.telias.countriesapp.views
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.puc.telias.countriesapp.R
 import com.puc.telias.countriesapp.databinding.RecyclerItemSearchCountriesBinding
 import com.puc.telias.countriesapp.models.Country
@@ -35,8 +37,10 @@ class CountriesSearchAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Country) {
             val name = itemView.findViewById<TextView>(R.id.country_name)
+            val image = itemView.findViewById<ImageView>(R.id.image_view)
 
             name.text = item.namePortuguese
+            image.load(item.flag)
         }
 
         init {

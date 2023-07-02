@@ -11,4 +11,5 @@
     <string name="button_cancel">Cancelar</string>
     <string name="title_main_screen">Lista de Países</string>
     <string name="menu_logout">Logout</string>
+    <string name="hint_busca">Buscar</string>
 </resources>
