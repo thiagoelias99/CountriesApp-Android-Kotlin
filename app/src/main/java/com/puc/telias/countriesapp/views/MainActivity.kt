@@ -137,6 +137,7 @@ class MainActivity : AppCompatActivity() {
     private fun showDialog(context: Context) {
         val addCountryDialogBinding = AddCountryDialogBinding.inflate(layoutInflater)
         var name = ""
+        searchedCountries = emptyList()
 
         val alertDialog = AlertDialog.Builder(context)
             .setView(addCountryDialogBinding.root)
@@ -150,6 +151,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val searchField = addCountryDialogBinding.searchText
+        searchField.setText("")
 
         searchField.addTextChangedListener(object : TextWatcher {
             private val handler = Handler()
