@@ -9,4 +9,6 @@
     <string name="title_register">Registre sua conta</string>
     <string name="hint_register_user_name">Nome</string>
     <string name="button_cancel">Cancelar</string>
+    <string name="title_main_screen">Lista de Países</string>
+    <string name="menu_logout">Logout</string>
 </resources>

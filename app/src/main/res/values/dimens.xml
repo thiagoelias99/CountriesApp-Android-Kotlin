@@ -4,4 +4,5 @@
     <dimen name="h1">36sp</dimen>
     <dimen name="h2">28sp</dimen>
     <dimen name="h3">22sp</dimen>
+    <dimen name="text_body_2">14sp</dimen>
 </resources>

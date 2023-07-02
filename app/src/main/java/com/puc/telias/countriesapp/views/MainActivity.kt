@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        title = "Minha Activity"
+        title = ""
         setSupportActionBar(binding.toolBar)
 
         //Ok
