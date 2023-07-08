@@ -61,6 +61,11 @@ class MainActivity : AppCompatActivity() {
         loadCountriesList(loggedUser)
         configureFAB(this)
         configureRecyclerView()
+
+        //Tests
+        lifecycleScope.launch {
+            repository.reFetchData()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

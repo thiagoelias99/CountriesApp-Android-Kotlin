@@ -1,5 +1,6 @@
 package com.puc.telias.countriesapp.webclient
 
+import com.puc.telias.countriesapp.webclient.services.CountryIBGEServices
 import com.puc.telias.countriesapp.webclient.services.CountryServices
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,10 +17,17 @@ class RetrofitConfig {
     }
 
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://restcountries.com/v3.1/translation/")
+        .baseUrl("https://restcountries.com/v3.1/")
+        .addConverterFactory(MoshiConverterFactory.create())
+        .client(client)
+        .build()
+
+    private val retrofit2: Retrofit = Retrofit.Builder()
+        .baseUrl("https://servicodados.ibge.gov.br/api/v1/paises/")
         .addConverterFactory(MoshiConverterFactory.create())
         .client(client)
         .build()
 
     val countryServices = retrofit.create(CountryServices::class.java)
+    val countryIBGEServices = retrofit2.create(CountryIBGEServices::class.java)
 }

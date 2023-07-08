@@ -7,6 +7,9 @@
 <https://restcountries.com/v3.1/name/brasil>
 <https://restcountries.com/v3.1/translation/espanha>
 
+https://restcountries.com/v3.1/translation/
+https://restcountries.com/v3.1/alpha/co
+
 <https://servicodados.ibge.gov.br/api/docs/paises>
 [GET]<https://servicodados.ibge.gov.br/api/v1/paises/{paises}>
 ### Ideias de UI

@@ -43,4 +43,8 @@ class CountriesRepository(
     suspend fun destroy(country: Country) {
         return dao.destroy(country)
     }
+
+    suspend fun reFetchData(){
+        webClient.searchByCode()
+    }
 }
