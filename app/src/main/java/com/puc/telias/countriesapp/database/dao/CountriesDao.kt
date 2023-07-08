@@ -22,6 +22,6 @@ interface CountriesDao {
     @Query("""SELECT * FROM countries WHERE user_name = :userName""")
     fun getAllFromUser(userName: String): Flow<List<Country>>
 
-    @Query("""SELECT * FROM countries WHERE code_cca3 = :code""")
+    @Query("""SELECT * FROM countries WHERE code_cca2 = :code""")
     suspend fun getByCode(code: String): Country?
 }

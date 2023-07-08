@@ -6,9 +6,9 @@ import java.util.UUID
 class CountryResponse(
     val name: Name?,
 //    val tld: List<String>,
-//    val cca2: String,
+    val cca2: String?,
 //    val ccn3: String,
-    val cca3: String?,
+//    val cca3: String?,
 //    val cioc: String,
 //    val independent: Boolean,
 //    val status: String,
@@ -42,7 +42,7 @@ class CountryResponse(
 ) {
     val country: Country?
         get() = Country(
-            code = cca3 ?: "",
+            code = cca2 ?: "",
             namePortuguese = translations?.get("por")?.common ?: "",
             nameUS = name?.common ?: "",
             nameLocal = name?.nativeName?.firstNotNullOf { it.value.common }?: "",

@@ -9,7 +9,7 @@ import java.util.UUID
 @Entity(tableName = "countries")
 data class Country(
     @PrimaryKey val uuid: UUID,
-    @ColumnInfo("code_cca3") val code: String,
+    @ColumnInfo("code_cca2") val code: String,
     @ColumnInfo("name_portuguese") val namePortuguese: String,
     @ColumnInfo("name_us") val nameUS: String,
     @ColumnInfo("name_local")val nameLocal: String,

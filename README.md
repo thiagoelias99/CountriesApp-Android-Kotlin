@@ -8,7 +8,7 @@
 <https://restcountries.com/v3.1/translation/espanha>
 
 <https://servicodados.ibge.gov.br/api/docs/paises>
-
+[GET]<https://servicodados.ibge.gov.br/api/v1/paises/{paises}>
 ### Ideias de UI
 #### Logi & register
 <https://dribbble.com/shots/21113101-Online-Course-App-Onboarding-Login-Register-Forgot-Password>
