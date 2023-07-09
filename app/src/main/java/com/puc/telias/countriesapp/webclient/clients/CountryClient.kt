@@ -7,6 +7,8 @@ import com.puc.telias.countriesapp.models.Country
 import com.puc.telias.countriesapp.webclient.RetrofitConfig
 import com.puc.telias.countriesapp.webclient.services.CountryIBGEServices
 import com.puc.telias.countriesapp.webclient.services.CountryServices
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import java.util.UUID
 
 class CountryClient {
@@ -26,33 +28,26 @@ class CountryClient {
                 )
     }
 
-    suspend fun searchByCode() {
-        val code = "BR"
-        val countryIBGE = countryIBGEServices.searchByCode(code).body()?.map { it.country }?.get(0)
-        val country = countryServices.searchByCode(code).body()?.map { it.country }?.get(0)
+    suspend fun searchByCode(code: String): Country? {
+        val country = countryServices.searchByCode(code).body()?.get(0)
+        val countryIBGE = countryIBGEServices.searchByCode(code).body()?.get(0)
 
-        val country2: Country = Country(
-            uuid = country.uuid,
-            code = String,
-            namePortuguese =: String,
-            nameUS = String,
-            nameLocal = String,
-            nameComplete = String,
-            currency = String,
-            capital = String,
-            region = String,
-            languages = String,
-            area = Double,
-            population = Double,
-            flag = String,
-            coatOfArms = String,
-            userName = String? = null
+        return Country(
+            code = country?.cca2 ?: "",
+            namePortuguese = country?.translations?.get("por")?.common ?: "",
+            nameUS = country?.name?.common ?: "",
+            nameLocal = country?.name?.nativeName?.firstNotNullOf { it.value.common } ?: "",
+            nameComplete = country?.name?.official ?: "",
+            currency = country?.currencies?.firstNotNullOf { it.value.symbol } ?: "",
+            capital = countryIBGE?.governo?.capital?.nome ?: "",
+            region = country?.subregion ?: "",
+            languages = countryIBGE?.linguas?.get(0)?.nome ?: "",
+            area = countryIBGE?.area?.total?.replace(",",".")?.toDouble() ?: 0.0,
+            population = country?.population ?: 0.0,
+            flag = country?.flags?.png ?: "",
+            coatOfArms = country?.coatOfArms?.png ?: "",
+            uuid = UUID.randomUUID()
         )
-
-
-        Log.i(TAG, "searchByCode: $countryIBGE")
-        Log.i(TAG, "searchByCode: $country")
-
 
     }
 }

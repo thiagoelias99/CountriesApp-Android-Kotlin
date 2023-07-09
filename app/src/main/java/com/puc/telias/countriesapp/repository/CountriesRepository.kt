@@ -24,8 +24,13 @@ class CountriesRepository(
         return filteredCountries
     }
 
-    suspend fun save(country: Country) {
-        return dao.insert(country)
+    suspend fun save(country: Country, userName: String) {
+        val updatedCountry = reFetchData(country?.code ?: "")
+        updatedCountry?.let {
+            it.userName = userName
+            dao.insert(it)
+        }
+        return
     }
 
     fun getAll(): Flow<List<Country>> {
@@ -44,7 +49,7 @@ class CountriesRepository(
         return dao.destroy(country)
     }
 
-    suspend fun reFetchData(){
-        webClient.searchByCode()
+    suspend fun reFetchData(code: String): Country?{
+        return webClient.searchByCode(code)
     }
 }

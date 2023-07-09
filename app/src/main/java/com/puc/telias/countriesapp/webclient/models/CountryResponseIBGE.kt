@@ -1,10 +1,12 @@
 package com.puc.telias.countriesapp.webclient.models
 
+import com.google.gson.annotations.SerializedName
 import com.puc.telias.countriesapp.models.Country
 import com.squareup.moshi.Json
+import kotlinx.serialization.SerialName
 import java.util.UUID
 
-class CountryResponseIBGE (
+data class CountryResponseIBGE(
 //    val id: CountryResponseIBGEID,
 //    val nome: Nome,
     val area: Area,
@@ -12,11 +14,10 @@ class CountryResponseIBGE (
     val linguas: List<Lingua>,
     val governo: Governo,
 
-    @Json(name = "unidades-monetarias")
-    val unidadesMonetarias: List<UnidadesMonetaria>,
+    @SerialName("unidades-monetarias") val unidadesMonetarias: List<UnidadesMonetaria>,
 
     val historico: String
-){
+) {
     val country: Country?
         get() = Country(
             code = "",
@@ -37,22 +38,22 @@ class CountryResponseIBGE (
         )
 }
 
-data class Area (
+data class Area(
     val total: String,
     val unidade: Unidade
 )
 
-data class Unidade (
+data class Unidade(
     val nome: String,
     val símbolo: String,
     val multiplicador: Long
 )
 
-data class Governo (
+data class Governo(
     val capital: Capital
 )
 
-data class Capital (
+data class Capital(
     val nome: String
 )
 
@@ -67,7 +68,7 @@ data class Capital (
 //    val iso31661Alpha3: String
 //)
 
-data class Lingua (
+data class Lingua(
 //    val id: LinguaID,
     val nome: String
 )
@@ -110,7 +111,7 @@ data class Lingua (
 //    val abreviadoES: String
 //)
 
-data class UnidadesMonetaria (
+data class UnidadesMonetaria(
 //    val id: UnidadesMonetariaID,
     val nome: String
 )

@@ -63,9 +63,6 @@ class MainActivity : AppCompatActivity() {
         configureRecyclerView()
 
         //Tests
-        lifecycleScope.launch {
-            repository.reFetchData()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -206,8 +203,7 @@ class MainActivity : AppCompatActivity() {
     private fun positiveButtonHandler() {
         lifecycleScope.launch {
             selectedCountry?.let { country ->
-                country.userName = loggedUser
-                repository.save(country)
+                repository.save(country, loggedUser)
             }
         }
     }
