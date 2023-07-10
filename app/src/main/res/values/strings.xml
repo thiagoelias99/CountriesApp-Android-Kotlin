@@ -16,4 +16,6 @@
     <string name="field_Title_currency">Moeda:</string>
     <string name="field_title_area">Área:</string>
     <string name="field_title_population">População:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

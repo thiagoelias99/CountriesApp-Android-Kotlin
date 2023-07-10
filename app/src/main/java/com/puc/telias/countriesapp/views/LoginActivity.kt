@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.puc.telias.countriesapp.R
@@ -13,6 +16,7 @@ import com.puc.telias.countriesapp.database.AppDatabase
 import com.puc.telias.countriesapp.databinding.ActivityLoginBinding
 import com.puc.telias.countriesapp.models.User
 import com.puc.telias.countriesapp.repository.UsersRepository
+import com.puc.telias.countriesapp.views.fragments.LoginFragment
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -30,6 +34,14 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val myData = bundleOf(
+            "USER" to User("telias", "Thiago", "123")
+        )
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add<LoginFragment>(R.id.fragmentContainerView, args = myData)
+        }
 
         configureInterface()
     }
