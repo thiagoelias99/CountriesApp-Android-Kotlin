@@ -42,20 +42,5 @@ class CountryDetailsActivity : AppCompatActivity() {
                 finish()
             }
         }
-
-        lifecycleScope.launch {
-            country = repository.getByCode(countryCode ?: "")
-            Log.i(TAG, "onCreate: $country")
-
-            binding.title.text = country?.namePortuguese ?: ""
-            binding.subTitle.text = country?.nameUS ?: ""
-            binding.decription.text = country?.nameComplete ?: ""
-            binding.capital.text = country?.capital ?: ""
-            binding.currency.text = country?.currency ?: ""
-            binding.area.text = country?.area.toString() ?: ""
-            binding.population.text = country?.population.toString() ?: ""
-            binding.flagContainer.load(country?.flag)
-            binding.armsContainer.load(country?.coatOfArms)
-        }
     }
 }
