@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/countryInformationFragment"
+
+        android:icon="@drawable/info_icon"
+        android:title="@string/country_tab_info" />
+
+    <item
+        android:id="@+id/countryHistoryFragment"
+
+        android:icon="@drawable/book_icon"
+        android:title="@string/country_tab_history" />
+</menu>

@@ -46,18 +46,8 @@ class CountryInformationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val countryCode = "BR"
-
-//        val countryCode = intent.getStringExtra("COUNTRY_CODE")
-
-//        binding.floatingActionButton.setOnClickListener {
-//            lifecycleScope.launch {
-//                country?.let {
-//                    repository.destroy(it)
-//                }
-//                finish()
-//            }
-//        }
+        val sharedPrefs = requireActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val countryCode = sharedPrefs.getString("COUNTRY_CODE", null)
 
         lifecycleScope.launch {
             country = repository.getByCode(countryCode ?: "")

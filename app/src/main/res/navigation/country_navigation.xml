@@ -15,6 +15,10 @@
             app:destination="@id/countryHistoryFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
+        <argument
+            android:name="countryCode"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
     <fragment
         android:id="@+id/countryHistoryFragment"
@@ -26,6 +30,10 @@
             app:destination="@id/countryInformationFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
+        <argument
+            android:name="countryCode"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 
 </navigation>
