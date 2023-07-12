@@ -55,6 +55,7 @@ class CountryResponse(
             population = population?.toDouble() ?: 0.0,
             flag = flags?.png ?: "",
             coatOfArms = coatOfArms?.png ?: "",
+            history = "",
             uuid = UUID.randomUUID()
         )
 }

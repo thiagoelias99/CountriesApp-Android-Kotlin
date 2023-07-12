@@ -21,6 +21,7 @@ data class Country(
     val area: Double,
     val population: Double,
     val flag : String,
+    val history : String,
     @ColumnInfo("coat_of_arms") val coatOfArms: String,
     @ColumnInfo("user_name") var userName: String? = null
 )

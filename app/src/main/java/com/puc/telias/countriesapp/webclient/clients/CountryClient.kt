@@ -1,14 +1,10 @@
 package com.puc.telias.countriesapp.webclient.clients
 
 import android.util.Log
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
 import com.puc.telias.countriesapp.models.Country
 import com.puc.telias.countriesapp.webclient.RetrofitConfig
 import com.puc.telias.countriesapp.webclient.services.CountryIBGEServices
 import com.puc.telias.countriesapp.webclient.services.CountryServices
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
 import java.util.UUID
 
 class CountryClient {
@@ -46,7 +42,8 @@ class CountryClient {
             population = country?.population ?: 0.0,
             flag = country?.flags?.png ?: "",
             coatOfArms = country?.coatOfArms?.png ?: "",
-            uuid = UUID.randomUUID()
+            uuid = UUID.randomUUID(),
+            history = countryIBGE?.historico ?: ""
         )
 
     }

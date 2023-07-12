@@ -1,9 +1,8 @@
 package com.puc.telias.countriesapp.views
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -56,13 +55,13 @@ class CountryDetailsActivity : AppCompatActivity() {
             }
         }
 
-//        binding.floatingActionButton.setOnClickListener {
-//            lifecycleScope.launch {
-//                country?.let {
-//                    repository.destroy(it)
-//                }
-//                finish()
-//            }
-//        }
+        binding.floatingActionButton.setOnClickListener {
+            lifecycleScope.launch {
+                country?.let {
+                    repository.destroy(it)
+                }
+                finish()
+            }
+        }
     }
 }

@@ -1,9 +1,6 @@
 package com.puc.telias.countriesapp.webclient.models
 
-import com.google.gson.annotations.SerializedName
 import com.puc.telias.countriesapp.models.Country
-import com.squareup.moshi.Json
-import kotlinx.serialization.SerialName
 import java.util.UUID
 
 data class CountryResponseIBGE(
@@ -14,7 +11,7 @@ data class CountryResponseIBGE(
     val linguas: List<Lingua>,
     val governo: Governo,
 
-    @SerialName("unidades-monetarias") val unidadesMonetarias: List<UnidadesMonetaria>,
+    val unidadesMonetarias: List<UnidadesMonetaria>,
 
     val historico: String
 ) {
@@ -34,6 +31,7 @@ data class CountryResponseIBGE(
             population = 0.0,
             flag = "",
             coatOfArms = "",
+            history = historico,
             uuid = UUID.randomUUID()
         )
 }

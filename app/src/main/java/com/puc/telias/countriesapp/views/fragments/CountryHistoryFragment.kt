@@ -52,18 +52,7 @@ class CountryHistoryFragment : Fragment() {
         lifecycleScope.launch {
             country = repository.getByCode(countryCode ?: "")
 
-            binding.history.text = country?.nameComplete
-//
-//            binding.title.text = country?.namePortuguese ?: ""
-//            binding.subTitle.text = country?.nameUS ?: ""
-//            binding.decription.text = country?.nameComplete ?: ""
-//            binding.capital.text = country?.capital ?: ""
-//            binding.currency.text = country?.currency ?: ""
-//            binding.area.text = country?.area.toString() ?: ""
-//            binding.population.text = country?.population.toString() ?: ""
-//            binding.flagContainer.load(country?.flag)
-//            binding.armsContainer.load(country?.coatOfArms)
+            binding.history.text = country?.history
         }
     }
-
 }
