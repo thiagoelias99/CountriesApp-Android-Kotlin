@@ -32,7 +32,9 @@ data class CountryResponseIBGE(
             flag = "",
             coatOfArms = "",
             history = historico,
-            uuid = UUID.randomUUID()
+            uuid = UUID.randomUUID(),
+            longitude = 0.0,
+            latitude = 0.0
         )
 }
 

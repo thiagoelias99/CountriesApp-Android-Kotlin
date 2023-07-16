@@ -8,7 +8,10 @@
 
     <item
         android:id="@+id/countryHistoryFragment"
-
         android:icon="@drawable/book_icon"
         android:title="@string/country_tab_history" />
+    <item
+        android:id="@+id/mapsFragment"
+        android:icon="@drawable/map_icon"
+        android:title="@string/location" />
 </menu>

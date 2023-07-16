@@ -37,7 +37,7 @@ class CountryResponse(
     val flags: Flags?,
     val coatOfArms: CoatOfArms?,
 //    val startOfWeek: String,
-//    val capitalInfo: CapitalInfo,
+    val capitalInfo: CapitalInfo,
 //    val postalCode: PostalCode
 ) {
     val country: Country?
@@ -56,7 +56,9 @@ class CountryResponse(
             flag = flags?.png ?: "",
             coatOfArms = coatOfArms?.png ?: "",
             history = "",
-            uuid = UUID.randomUUID()
+            uuid = UUID.randomUUID(),
+            latitude = capitalInfo.latlng[0],
+            longitude = capitalInfo.latlng[1]
         )
 }
 
@@ -87,9 +89,9 @@ data class CoatOfArms(
     val svg: String
 )
 
-//data class CapitalInfo (
-//    val latlng: List<Double>
-//)
+data class CapitalInfo (
+    val latlng: List<Double>
+)
 //
 //data class Car (
 //    val signs: List<String>,

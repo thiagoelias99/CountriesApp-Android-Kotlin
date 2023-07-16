@@ -43,8 +43,9 @@ class CountryClient {
             flag = country?.flags?.png ?: "",
             coatOfArms = country?.coatOfArms?.png ?: "",
             uuid = UUID.randomUUID(),
-            history = countryIBGE?.historico ?: ""
+            history = countryIBGE?.historico ?: "",
+            latitude = country?.capitalInfo?.latlng?.get(0) ?: 0.0,
+            longitude = country?.capitalInfo?.latlng?.get(1) ?: 0.0
         )
-
     }
 }
