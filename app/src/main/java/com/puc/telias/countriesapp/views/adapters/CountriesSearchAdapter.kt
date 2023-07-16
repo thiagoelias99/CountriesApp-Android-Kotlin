@@ -1,4 +1,4 @@
-package com.puc.telias.countriesapp.views
+package com.puc.telias.countriesapp.views.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,20 +8,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.puc.telias.countriesapp.R
-import com.puc.telias.countriesapp.databinding.RecyclerItemListCountriesBinding
+import com.puc.telias.countriesapp.databinding.RecyclerItemSearchCountriesBinding
 import com.puc.telias.countriesapp.models.Country
 
-class CountriesListAdapter(
+class CountriesSearchAdapter(
     private val context: Context,
     countriesList: List<Country?> = emptyList(),
     var itemClickHandler: (country: Country) -> Unit = {}
-) : RecyclerView.Adapter<CountriesListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<CountriesSearchAdapter.ViewHolder>() {
 
     private val countries = countriesList.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            RecyclerItemListCountriesBinding.inflate(LayoutInflater.from(context), parent, false)
+            RecyclerItemSearchCountriesBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -32,15 +32,13 @@ class CountriesListAdapter(
 
     override fun getItemCount(): Int = countries.size
 
-    inner class ViewHolder(binding: RecyclerItemListCountriesBinding) :
+    inner class ViewHolder(binding: RecyclerItemSearchCountriesBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Country) {
-            val title = itemView.findViewById<TextView>(R.id.title)
-            val subTitle = itemView.findViewById<TextView>(R.id.subtitle)
-            val image = itemView.findViewById<ImageView>(R.id.image)
+            val name = itemView.findViewById<TextView>(R.id.country_name)
+            val image = itemView.findViewById<ImageView>(R.id.image_view)
 
-            title.text = item.namePortuguese
-            subTitle.text = item.nameUS
+            name.text = item.namePortuguese
             image.load(item.flag)
         }
 
@@ -51,6 +49,7 @@ class CountriesListAdapter(
                     countries[position]?.let {
                         itemClickHandler(it)
                     }
+
                 }
             }
         }

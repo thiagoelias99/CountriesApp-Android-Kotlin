@@ -1,4 +1,4 @@
-package com.puc.telias.countriesapp.views
+package com.puc.telias.countriesapp.views.activity
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,8 @@ import com.puc.telias.countriesapp.databinding.ActivityMainBinding
 import com.puc.telias.countriesapp.databinding.AddCountryDialogBinding
 import com.puc.telias.countriesapp.models.Country
 import com.puc.telias.countriesapp.repository.CountriesRepository
+import com.puc.telias.countriesapp.views.adapters.CountriesListAdapter
+import com.puc.telias.countriesapp.views.adapters.CountriesSearchAdapter
 import com.puc.telias.countriesapp.webclient.clients.CountryClient
 import kotlinx.coroutines.launch
 
@@ -98,6 +101,9 @@ class MainActivity : AppCompatActivity() {
                 putExtra("COUNTRY_CODE", it.code)
                 startActivity(this)
             }
+        }
+        countriesListAdapter.longItemClickHandler = {
+            showDeleteDialog(it)
         }
         val recyclerList = binding.recyclerView
         recyclerList.run {
@@ -206,5 +212,22 @@ class MainActivity : AppCompatActivity() {
                 repository.save(country, loggedUser)
             }
         }
+    }
+
+    private fun showDeleteDialog(country: Country){
+        AlertDialog.Builder(this)
+            .setMessage("Deseja excluir o país ${country.namePortuguese}?")
+            .setTitle("Deletar")
+            .setPositiveButton("Confirmar"){_, _->
+                lifecycleScope.launch {
+                    country?.let {
+                        repository.destroy(it)
+                    }
+                }
+            }
+            .setNegativeButton("Cancelar"){_, _->
+
+            }
+            .show()
     }
 }

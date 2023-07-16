@@ -1,4 +1,4 @@
-package com.puc.telias.countriesapp.views
+package com.puc.telias.countriesapp.views.activity
 
 import android.content.Context
 import android.os.Bundle

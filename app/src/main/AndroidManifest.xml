@@ -17,13 +17,13 @@
 
 
         <activity
-            android:name=".views.LoginActivity"
+            android:name=".views.activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".views.CountryDetailsActivity"
+            android:name=".views.activity.CountryDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".views.MainActivity"
+            android:name=".views.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

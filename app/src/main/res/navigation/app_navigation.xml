@@ -7,17 +7,17 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.puc.telias.countriesapp.views.MainActivity"
+        android:name="com.puc.telias.countriesapp.views.activity.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
     <activity
         android:id="@+id/loginActivity"
-        android:name="com.puc.telias.countriesapp.views.LoginActivity"
+        android:name="com.puc.telias.countriesapp.views.activity.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
     <activity
         android:id="@+id/countryDetailsActivity"
-        android:name="com.puc.telias.countriesapp.views.CountryDetailsActivity"
+        android:name="com.puc.telias.countriesapp.views.activity.CountryDetailsActivity"
         android:label="activity_country_details"
         tools:layout="@layout/activity_country_details"
         />

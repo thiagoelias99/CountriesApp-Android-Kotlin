@@ -8,14 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.puc.telias.countriesapp.R
 import com.puc.telias.countriesapp.database.AppDatabase
 import com.puc.telias.countriesapp.databinding.FragmentLoginBinding
 import com.puc.telias.countriesapp.repository.UsersRepository
-import com.puc.telias.countriesapp.views.MainActivity
+import com.puc.telias.countriesapp.views.activity.MainActivity
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {

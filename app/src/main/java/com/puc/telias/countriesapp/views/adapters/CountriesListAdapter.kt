@@ -1,28 +1,28 @@
-package com.puc.telias.countriesapp.views
+package com.puc.telias.countriesapp.views.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.puc.telias.countriesapp.R
-import com.puc.telias.countriesapp.databinding.RecyclerItemSearchCountriesBinding
+import com.puc.telias.countriesapp.databinding.RecyclerItemListCountriesBinding
 import com.puc.telias.countriesapp.models.Country
 
-class CountriesSearchAdapter(
+class CountriesListAdapter(
     private val context: Context,
     countriesList: List<Country?> = emptyList(),
-    var itemClickHandler: (country: Country) -> Unit = {}
-) : RecyclerView.Adapter<CountriesSearchAdapter.ViewHolder>() {
+    var itemClickHandler: (country: Country) -> Unit = {},
+    var longItemClickHandler: (country: Country) -> Unit = {},
+) : RecyclerView.Adapter<CountriesListAdapter.ViewHolder>() {
 
     private val countries = countriesList.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            RecyclerItemSearchCountriesBinding.inflate(LayoutInflater.from(context), parent, false)
+            RecyclerItemListCountriesBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -33,13 +33,15 @@ class CountriesSearchAdapter(
 
     override fun getItemCount(): Int = countries.size
 
-    inner class ViewHolder(binding: RecyclerItemSearchCountriesBinding) :
+    inner class ViewHolder(binding: RecyclerItemListCountriesBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Country) {
-            val name = itemView.findViewById<TextView>(R.id.country_name)
-            val image = itemView.findViewById<ImageView>(R.id.image_view)
+            val title = itemView.findViewById<TextView>(R.id.title)
+            val subTitle = itemView.findViewById<TextView>(R.id.subtitle)
+            val image = itemView.findViewById<ImageView>(R.id.image)
 
-            name.text = item.namePortuguese
+            title.text = item.namePortuguese
+            subTitle.text = item.nameUS
             image.load(item.flag)
         }
 
@@ -50,8 +52,17 @@ class CountriesSearchAdapter(
                     countries[position]?.let {
                         itemClickHandler(it)
                     }
-
                 }
+            }
+
+            binding.root.setOnLongClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    countries[position]?.let {
+                        longItemClickHandler(it)
+                    }
+                }
+                true
             }
         }
     }
