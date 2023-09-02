@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "996409046967",
+    "project_id": "countriesapp-android-kotlin",
+    "storage_bucket": "countriesapp-android-kotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996409046967:android:5cdd0ffc631172db655a32",
+        "android_client_info": {
+          "package_name": "com.puc.telias.countriesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "996409046967-gq0ioin57ui0u3t1vao51ai1lg6sfae0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtCI4fb_fKv-P9rtUCHLBIk3bf1zfMcxc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "996409046967-gq0ioin57ui0u3t1vao51ai1lg6sfae0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

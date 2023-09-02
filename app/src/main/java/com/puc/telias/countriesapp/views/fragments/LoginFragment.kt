@@ -10,6 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.puc.telias.countriesapp.R
 import com.puc.telias.countriesapp.database.AppDatabase
 import com.puc.telias.countriesapp.databinding.FragmentLoginBinding
@@ -22,6 +27,7 @@ class LoginFragment : Fragment() {
     val TAG = "LoginFragment"
 
     private lateinit var activityContext: Context
+    private lateinit var auth: FirebaseAuth
 
     private val repository by lazy {
         UsersRepository(
@@ -48,6 +54,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        auth = Firebase.auth
         configureInterface()
     }
 
@@ -77,22 +84,25 @@ class LoginFragment : Fragment() {
     private fun configureLoginButton() {
         val intent = Intent(activityContext, MainActivity::class.java)
         binding.loginButton.setOnClickListener {
+            val password = binding.password.text.toString()
+            val email = binding.userEmail.text.toString()
 
-            lifecycleScope.launch {
-                val user = repository.login(
-                    binding.userName.text.toString(),
-                    binding.password.text.toString()
-                )
-                if (user != null) {
-                    val sharedPrefs = requireActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-                    val editor = sharedPrefs.edit()
-                    editor.apply {
-                        putString("USER_KEY", user.userName)
-                    }.apply()
-                    startActivity(intent)
-                } else {
-                    showError("Usuário ou senha inválido")
-                }
+            if (password.isBlank() or email.isBlank()){
+                showError("Usuário e senha devem estar preenchidos")
+            } else{
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnSuccessListener {
+                        startActivity(intent)
+                    }
+                    .addOnFailureListener {exception ->
+                        val mensagem: String = when (exception){
+                            is FirebaseAuthInvalidUserException -> "Usuário não existe"
+                            is FirebaseAuthInvalidCredentialsException -> "Usúario ou senha inválidos"
+                            else -> "Erro ao registrar"
+                        }
+
+                        showError(mensagem) //Faz logoff ao cadastrar
+                    }
             }
         }
     }

@@ -3,7 +3,7 @@
     <string name="button_login_register">Registrar</string>
     <string name="button_login_login">Login</string>
     <string name="hint_login_password">Senha</string>
-    <string name="hint_login_user_name">Usuário</string>
+    <string name="hint_login_user_name">Email</string>
     <string name="title_login">Entre com sua conta</string>
     <string name="sub_title_login">Ou registre para uma nova</string>
     <string name="title_register">Registre sua conta</string>

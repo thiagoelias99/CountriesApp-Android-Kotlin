@@ -14,6 +14,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.puc.telias.countriesapp.R
 import com.puc.telias.countriesapp.database.AppDatabase
 import com.puc.telias.countriesapp.databinding.ActivityMainBinding
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loggedUser: String
     var searchedCountries: List<Country?> = emptyList()
     var selectedCountry: Country? = null
+    private lateinit var auth: FirebaseAuth
 
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -59,6 +63,8 @@ class MainActivity : AppCompatActivity() {
         title = ""
         setSupportActionBar(binding.toolBar)
 
+        auth = Firebase.auth
+
         //Ok
         loadUser()
         loadCountriesList(loggedUser)
@@ -83,14 +89,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleLogout() {
-        getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE).let { sharedPrefs ->
-            val editor = sharedPrefs.edit()
-            editor.apply {
-                putString("USER_KEY", null)
-            }.apply()
-            Intent(this, LoginActivity::class.java).run {
-                startActivity(this)
-            }
+        auth.signOut()
+        Intent(this, LoginActivity::class.java).run {
+            startActivity(this)
         }
     }
 
@@ -121,16 +122,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadUser() {
-        val user: String? = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE).run {
-            getString("USER_KEY", null)
-        }
+        val user = Firebase.auth.currentUser
         if (user == null) {
             loggedUser = ""
             Intent(this, LoginActivity::class.java).run {
                 startActivity(this)
             }
         } else {
-            loggedUser = user
+            loggedUser = user.uid
         }
     }
 
@@ -214,18 +213,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showDeleteDialog(country: Country){
+    private fun showDeleteDialog(country: Country) {
         AlertDialog.Builder(this)
             .setMessage("Deseja excluir o país ${country.namePortuguese}?")
             .setTitle("Deletar")
-            .setPositiveButton("Confirmar"){_, _->
+            .setPositiveButton("Confirmar") { _, _ ->
                 lifecycleScope.launch {
                     country?.let {
                         repository.destroy(it)
                     }
                 }
             }
-            .setNegativeButton("Cancelar"){_, _->
+            .setNegativeButton("Cancelar") { _, _ ->
 
             }
             .show()
